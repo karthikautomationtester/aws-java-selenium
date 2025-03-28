@@ -19,9 +19,17 @@ jobs:
       - store_artifacts:
           path: target/reports
           destination: test-result
+  build:
+    docker:
+      - image: cimg/openjdk:17.0
+    steps:
+      - checkout
+      - run:
+          command: echo 'Running build step'
 
 workflows:
   version: 2
   test_and_deploy:
     jobs:
+      - build
       - test
